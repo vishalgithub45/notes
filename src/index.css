@@ -41,7 +41,7 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
 }
 
-.note-footer{ 
+.note-footer{  
   
   align-items: center;
   display: flex;
@@ -52,8 +52,8 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-radius: 0%; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0%; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   padding: 10px;
   border: none;
   cursor: pointer;
