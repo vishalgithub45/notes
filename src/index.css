@@ -1,167 +1,231 @@
- *{
-  border: 0;
+*{
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
- }
- 
- body {
+  transition-duration: 0.2s;
+}
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aliceblue;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.note{
-   /* border: 1px solid black; */
-   display: flex;
-   justify-content:space-between;
-   flex-direction: column;
-   padding: 15px;
-   background-color: rgb(255, 255, 133);
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   min-height: 200px;
-   border-radius: 10px;
-   word-wrap: break-word; 
-}
-.notes-container {
+.container{
   max-width: 980px;
-  padding: 10px;
-  margin: 10px auto;
-  
+  min-height: 100vh;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.notes-list {
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
 }
 
-.note-footer{  
-  
-  align-items: center;
+.note {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  padding: 0.8rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  white-space:pre-wrap;
+  min-height: 200px;
+  background-color: rgb(255, 255, 159);
+}
+.note span{
+  word-wrap: break-word;
+}
+.note-footer{
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
 }
 
-.delete-btn{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 0%; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  padding: 10px;
-  border: none;
-  cursor: pointer;
+.delete-icon{
+  width: 30px;
+  height: 30px;
   background-color: white;
-  color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   transition-duration: 0.2s;
-
 }
-.delete-btn:hover{
+.delete-icon:hover{
   background-color: red;
   color: white;
 }
 
-.new-note{
+.new{
   background-color: aquamarine;
 }
-
-.new-note textarea {
-  height: 80%;
-  background-color: transparent;
-  border: none;
-  outline: none;
+.new textarea{
   resize: none;
-}
-.add-btn {
-  background-color: white;
-  padding: 7px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.search-box {
-  width: 100%;
-  /* border: 1px solid black; */
-  max-width: 980px;
-  margin: auto;
-}
-
-.search-box input{
-  width: 100%; 
   background-color: transparent;
+  outline: none;
   border: none;
-  max-width: 980px;
-  padding: 5px;
-  border-bottom: 1px solid black;
+}
+.save{
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition-duration: 0.2s;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.save:active{
+  scale: 0.91;
+}
+
+.search-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 0 20px 0;
+}
+
+.search-container input{
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 7px 0 7px 30px;
+  outline: none;
+  border-bottom: 1px solid transparent;
+  transition-duration: 0.2s;
+}
+.search-container input:focus{
+  border-bottom: 1px solid grey;
+}
+.search-icon{
+  position: absolute;
+  left: 0px;
 }
 
 .header{
-  max-width: 980px;
-  /* border: 1px solid black; */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px auto;
+  padding: 30px 15px ;
 }
 
-/* The switch - the box around the slider */
-.switch {
-  font-size: 17px;
+.switch input {
+  display: none;
+ }
+
+ 
+ .switch {
+  width: 40px;
+  height: 20px;
   position: relative;
-  display: inline-block; 
-  width: 62px;
-  height: 35px;
  }
  
- /* Hide default HTML checkbox */
- .switch input {
-  opacity: 1;
-  width: 0;
-  height: 0;
- }
- 
- /* The slider */
  .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0px;
-  background: #fff;
-  transition: .4s;
   border-radius: 30px;
-  border: 1px solid #ccc;
+  box-shadow: 0 0 0 2px #777, 0 0 4px #777;
+  cursor: pointer;
+  border: 4px solid transparent;
+  overflow: hidden;
+  transition: 0.2s;
  }
  
  .slider:before {
   position: absolute;
   content: "";
-  height: 1.9em;
-  width: 1.9em;
-  border-radius: 16px;
-  left: 1.2px;
-  top: 0;
-  bottom: 0;
-  background-color: white;
-  box-shadow: 0 2px 5px #999999;
-  transition: .4s;
+  width: 100%;
+  height: 100%;
+  background-color: #777;
+  border-radius: 30px;
+  transform: translateX(-20px);
+  /*translateX(-(w-h))*/
+  transition: 0.2s;
+ }
+ .header h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ input:checked + .slider:before {
+  transform: translateX(20px);
+  /*translateX(w-h)*/
+  background-color: limeGreen;
  }
  
  input:checked + .slider {
-  background-color: #5fdd54;
-  border: 1px solid transparent;
+  box-shadow: 0 0 0 2px limeGreen, 0 0 8px limeGreen;
  }
  
- input:checked + .slider:before {
-  transform: translateX(1.5em);
+ .switch200 .slider:before {
+  width: 200%;
+  transform: translateX(-82px);
+  /*translateX(-(w-h))*/
  }
  
+ .switch200 input:checked + .slider:before {
+  background-color: red;
+ }
  
+ .switch200 input:checked + .slider {
+  box-shadow: 0 0 0 2px red, 0 0 8px red;
+ }
+
+ @media screen and (max-width:345px) {
+  .header h1{
+    font-size: 25px;
+  }
+  .header{
+    padding: 30px 0;
+  }
+ }
+
+ .dark-mode{
+  min-height: 100vh;
+  background-color: black;
+ }
+ .dark-mode .header{
+  color: white;
+ }
+ .dark-mode input{
+  color: white;
+ }
+
+ .dark-mode .note{
+  background-color: rgb(53, 53, 53);
+  color: white !important;
+ }
+ .dark-mode .search-icon{
+  color: white;
+ }
+ .dark-mode textarea{
+  color: white;
+ }
+ .dark-mode textarea::placeholder{
+  color: white;
+ }
+ .dark-mode .new{
+  background-color: rgb(99, 99, 99);;
+ }
+ .dark-mode .note .delete-icon{
+  color: black;
+ }
+ .dark-mode .note .delete-icon:hover{
+  color: white;
+ }

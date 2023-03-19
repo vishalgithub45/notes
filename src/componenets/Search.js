@@ -1,12 +1,12 @@
+
 import React from 'react'
-// import {BiSearchAlt2} from 'react-icons/bi'
-function Search({searchText,handleSearchText}) {
+import {FaSearch} from 'react-icons/fa'
+
+export default function Search({handleSearchBar}) {
   return (
-    <div className='search-box'>
-        {/* <BiSearchAlt2/> */}
-        <input value={searchText} onChange={(e)=> handleSearchText(e.target.value)} type='text' placeholder='search notes...'/>
+    <div className='search-container'>
+        <FaSearch className='search-icon'/>
+        <input onChange={(e)=>{handleSearchBar(e.target.value)}} type="text" placeholder='Type to search notes...' />
     </div>
   )
 }
-
-export default Search  

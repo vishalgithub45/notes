@@ -1,15 +1,18 @@
-import React from 'react'
+import React from "react";
 
-function Header() {
+export default function Header({ handleDarkMode }) {
   return (
-    <div className='header'>
-        <h1>Dev Session Notes App</h1>
-        <label class="switch"> 
-            <input type="checkbox"/>
-            <span class="slider"></span>
-        </label>
+    <div className="header">
+      <h1>React Notes App</h1>
+      <label className="switch">
+        <input
+          type="checkbox"
+          onClick={() => {
+            handleDarkMode((previousState) => !previousState);
+          }}
+        />
+        <span className="slider"></span>
+      </label>
     </div>
-  )
-}
-
-export default Header 
+  );
+} 

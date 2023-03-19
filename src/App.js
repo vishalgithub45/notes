@@ -1,86 +1,63 @@
-import { nanoid } from "nanoid";
 import React, { useState } from "react";
-import "./App.css";
-import NoteList from "./componenets/NoteList";
+import NotesList from "./componenets/NoteList";
+import { nanoid } from "nanoid";
 import Search from "./componenets/Search";
 import Header from "./componenets/Header";
 
 function App() {
+  const [myNotes, setMyNotes] = useState([]);
   const [noteText, setNoteText] = useState("");
   const [searchText, setSearchText] = useState("");
-  const [notes, setNotes] = useState([
-    {
-      text: "rutu",
-      data: "04/06/2002",
-      id: nanoid(),
-    },
-    {
-      text: "aniket", 
-      data: "04/06/2002",
-      id: nanoid(),
-    },
-    {
-      text: "vishal",
-      data: "04/06/2002",
-      id: nanoid(),
-    },
-    {
-      text: "ajay",
-      data: "04/06/2002",
-      id: nanoid(),
-    },
-    {
-      text: "aku",
-      data: "04/06/2002",
-      id: nanoid(),
-    },
-  ]);
-  function addNote() {
-    // console.log(noteText);
-    const date = new Date().toLocaleDateString();
-    setNoteText("");
+  const [darkMode, setDarkMode] = useState(false);
 
-    const newNote = {
-      text: noteText,
-      date: date,
-      id: nanoid(),
-    };
-
-    const updateNotes = [...notes, newNote];
-    //  console.log(updateNotes);
-    setNotes(updateNotes);
-  }
-  function handleNoteText(text) {
+  function updateNote(text) {
     setNoteText(text);
-    // console.log(noteText);
-  }
-  //  function handleDeleteNote(id) {
-  //   console.log(id);
-  //  }
-
-  function handleDeleteNote(id) {
-    console.log(id);
-    const updateNotes = notes.filter((note) => note.id !== id);
-    setNotes(updateNotes);
   }
 
-  function handleSearchText(text) {
-    setSearchText(text);
-    console.log("search txt changed");
+  function addNote() {
+    if (noteText.trim().length == 0) {
+      alert("Add Some Text First");
+      setNoteText('')
+    } else {
+      const date = new Date().toLocaleDateString();
+
+      const myNewNote = {
+        id: nanoid(),
+        text: noteText,
+        date: date,
+      };
+
+      const updatedNotes = [...myNotes, myNewNote];
+      setMyNotes(updatedNotes);
+      setNoteText("");
+    }
+  }
+
+  function deleteNote(id) {
+    const updatedNotes = myNotes.filter((note) => note.id !== id);
+    setMyNotes(updatedNotes);
+  }
+
+  function searchBar(text) {
+    setSearchText(text.toLowerCase());
   }
 
   return (
-    <>
-      <Header/> 
-      <Search searchText={searchText} handleSearchText={handleSearchText} />
-      <NoteList
-        handleDeleteNote={handleDeleteNote}
-        addNote={addNote}
-        handleNoteText={handleNoteText}
-        noteText={noteText}
-        notes={notes.filter(note => note.text.includes(searchText))}
-      />
-    </>
+    <div className={darkMode && "dark-mode"}>
+      <div className="container">
+        <Header handleDarkMode={setDarkMode} />
+        <Search handleSearchBar={searchBar} />
+        <NotesList
+          noteText={noteText}
+          handleNoteText={updateNote}
+          handleAddNote={addNote}
+          handleDeleteNotes={deleteNote}
+          myNotes={myNotes.filter((note) =>
+            note.text.toLowerCase().includes(searchText)
+          )}
+        />
+      </div>
+    </div>
   );
 }
 

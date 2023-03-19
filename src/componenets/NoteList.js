@@ -1,14 +1,30 @@
-import React from 'react'
-import Note from './Note'
-import AddNote from './AddNotes' 
-export default function NoteList({notes,addNote,noteText,handleNoteText,handleDeleteNote}) {
-    // console.log(notes)
-  return (
-    <div className='notes-container'>
-        <AddNote noteText={noteText} handleNoteText={handleNoteText} addNote={addNote} />
-    {notes.map(note => <Note handleDeleteNote={handleDeleteNote} key={note.id} note= {note}/>)}
-    </div> 
-  )  
-}
+import React from "react";
+import AddNote from "./AddNotes";
+import Note from "./Note";
 
- 
+export default function NotesList({
+  myNotes,
+  handleNoteText,
+  handleAddNote,
+  noteText,
+  handleDeleteNotes,
+}) {
+  return (
+    <div className="notes-list">
+      <AddNote
+        noteText={noteText}
+        handleAddNote={handleAddNote}
+        handleNoteText={handleNoteText}
+      />
+      {myNotes.map((note) => {
+        return (
+          <Note
+            handleDeleteNotes={handleDeleteNotes}
+            key={note.id}
+            note={note}
+          />
+        );
+      })}
+    </div>
+  );
+}

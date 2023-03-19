@@ -1,16 +1,22 @@
-import React from 'react'
+import React from "react";
 
-export default  function AddNotes({addNote,noteText,handleNoteText}) {
+export default function AddNote({ handleNoteText, handleAddNote, noteText }) {
   return (
-    <div className='note new-note'>
-        <textarea value={noteText} onChange={(e)=>handleNoteText(e.target.value)}  cols="30" rows="10" maxLength={250} placeholder="Type someting here....."></textarea>
-
-        <div className='note-footer'>
-            <small className='remaining'>remaining: {250 - noteText.length}</small>
-            <button className='add-btn' onClick={addNote}>Add</button>
-
-        </div>
+    <div className="note new">
+      <textarea
+        onChange={(e) => {
+          handleNoteText(e.target.value);
+        }}
+        value={noteText}
+        cols="8"
+        rows="7"
+        placeholder="Type something here..."
+        maxLength="250"
+      ></textarea>
+      <div className="note-footer">
+        <small>Remaining: {250 - noteText.length}</small>
+        <button onClick={handleAddNote} className="save">Save</button>
+      </div>
     </div>
-  )
-} 
-
+  );
+}
